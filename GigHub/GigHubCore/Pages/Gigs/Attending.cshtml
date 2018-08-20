@@ -1,0 +1,78 @@
+﻿@page
+@using GigHubCore.Core.Models
+@model GigHubCore.Pages.Gigs.AttendingModel
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Shows que irei";
+}
+
+@if (Model.Gigs.Count() == 0)
+{
+    <h2>Não há shows agendados</h2>
+}
+else
+{
+    <h2>Shows que irei</h2>
+}
+
+<ul id="gigs" class="gigs voffset4">
+    @foreach (var gig in Model.Gigs)
+    {
+        <li>
+            <div class="date">
+                <div class="month">
+                    @gig.DateTime.ToString("MMM")
+                </div>
+                <div class="day">
+                    @gig.DateTime.ToString("d ")
+                </div>
+            </div>
+            <div class="details">
+                <span class="artist">
+                    @if (!gig.IsCanceled)
+                    {
+                        <a asp-page="GigDetails" asp-route-id="@gig.Id">
+                            @gig.Artist.Name
+                        </a>
+                    }
+                    else
+                    {
+                        @gig.Artist.Name
+                    }
+
+                </span>
+                <span class="genre">
+                    @gig.Genre.Name
+                </span>
+                @if (gig.IsCanceled)
+                {
+                    <span class="label label-warning">Cancelado</span>
+                }
+
+                @if (SignInManager.IsSignedIn(User) && !gig.IsCanceled)
+                {
+                    <button data-gig-id="@gig.Id"
+                            class="btn
+                            @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default")
+                            btn-sm js-toggle-attendance">
+                        @(Model.Attendances.Contains(gig.Id) ? "Indo" : "Comparecer")
+                    </button>
+                }
+            </div>
+        </li>
+
+    }
+</ul>
+
+<div>
+    <a asp-page="/Index">Voltar</a>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            GigsController.init("#gigs");
+        });
+    </script>
+}

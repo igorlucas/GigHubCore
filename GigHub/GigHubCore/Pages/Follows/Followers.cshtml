@@ -1,0 +1,14 @@
+﻿@page
+@model GigHubCore.Pages.Follows.FollowersModel
+@{
+    ViewData["Title"] = "Meus seguidores";
+}
+
+<h2>@ViewData["Title"]</h2><br />
+<ul>
+    @foreach (var followee in Model.Followers)
+    {
+        <li>@followee.Follower.Name</li><br/>
+    }
+</ul>
+

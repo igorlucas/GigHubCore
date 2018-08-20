@@ -1,0 +1,44 @@
+@using Microsoft.AspNetCore.Identity
+@using GigHubCore.Core.Models
+@inject GigHubCore.Persistence.DbContexts.ApplicationDbContext _context
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+    
+@if (SignInManager.IsSignedIn(User))
+{
+    var user = _context.Users.Single(u => u.Id == UserManager.GetUserId(User));
+
+    <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="notifications">
+                <a id ="btn-notifications-link">
+                    <i class="glyphicon glyphicon-globe"></i>
+                    <span class="badge js-notifications-count hide"></span>
+                </a>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    @user.Name <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a asp-page="/Gigs/Mine">Meus Shows</a></li>
+                    <li><a asp-page="/Gigs/Attending">Shows que irei</a></li>
+                    <li><a asp-page="/Follows/Followers">Seguidores</a></li>
+                    <li><a asp-page="/Follows/Followees">Seguindo</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <button type="submit" class="btn btn-link">Sair</button>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-page="/Account/Register">Registrar-se</a></li>
+        <li><a asp-page="/Account/Login">Entrar</a></li>
+    </ul>
+}

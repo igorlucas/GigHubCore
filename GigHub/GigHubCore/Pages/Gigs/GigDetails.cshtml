@@ -1,0 +1,45 @@
+﻿@page
+@model GigHubCore.Pages.Gigs.GigDetailsModel
+@using GigHubCore.Core.Models
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Detalhes do Show";
+}
+
+<h2>Detalhes do Show</h2>
+<h3>
+    @Model.Input.Gig.Artist.Name
+    @if (SignInManager.IsSignedIn(User))
+    {
+        if (Model.Input.IsFollowing)
+        {
+            <button class="btn btn-info js-toggle-follow" data-user-id="@Model.Input.Gig.ArtistId">Seguindo</button>
+        }
+        else
+        {
+            <button class="btn btn-default js-toggle-follow" data-user-id="@Model.Input.Gig.ArtistId">Seguir</button>
+        }
+    }
+</h3>
+<p>
+    <strong>Local:</strong> @Model.Input.Gig.Venue <br />
+    <strong>Data:</strong> @Model.Input.Gig.DateTime.ToString("m") <br />
+    <strong>Horário:</strong> @Model.Input.Gig.DateTime.ToString("HH:mm") <br />
+    <strong>Público:</strong> @Model.Input.Gig.Attendances.Count
+</p>
+@if (SignInManager.IsSignedIn(User) && Model.Input.IsAttending)
+{
+    <p>Você marcou presença nesse show.</p>
+}
+
+<a href="javascript:window.history.go(-1)">Voltar</a>
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            GigsDetailsController.init();
+        });
+    </script>
+}

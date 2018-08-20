@@ -1,0 +1,229 @@
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+/* Bootstrap Overrides */
+.navbar-inverse {
+    background-color: #007F5B;
+    border-color: #007F5B;
+}
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #fff;
+    }
+
+    .navbar-inverse .navbar-brand {
+        color: #fff;
+        font-weight: 700;
+    }
+
+    .navbar-inverse .notifications {
+        position: relative;
+    }
+
+        .navbar-inverse .notifications .badge {
+            position: absolute;
+            top: 8px;
+            right: 0;
+            background: #245e11;
+        }
+
+    .navbar-inverse .btn-link {
+        color: #000;
+        padding: 0px 0px 2px 2px;
+        margin-left: 15px;
+    }
+
+        .navbar-inverse .btn-link:hover {
+            color: #000;
+        }
+
+.dropdown-menu {
+    min-width: 170px;
+    box-shadow: none;
+}
+
+    .dropdown-menu li a {
+        color: #000;
+    }
+
+    .dropdown-menu li:hover {
+        background-color: #f0f0f0;
+    }
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    color: #fff;
+    background-color: #007252;
+}
+
+
+
+body {
+    font-size: 15px;
+}
+
+body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: Noto Sans, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    font-size: 15px;
+    padding: 0px 15px;
+    width: 90%;
+    -ms-border-radius: 7px;
+    border-radius: 7px;
+}
+
+.btn {
+    /*font-size: 15px;*/
+    -ms-border-radius: 7px;
+    border-radius: 7px;
+}
+
+.dropdown-menu > li > a {
+    padding: 3px 15px;
+}
+
+/*Page-level styles*/
+
+.gigs {
+    list-style: none;
+}
+
+    .gigs > li {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+        .gigs > li .date {
+            background-color: red;
+            color: white;
+            text-align: center;
+            width: 60px;
+            -ms-border-radius: 8px;
+            border-radius: 8px;
+        }
+
+        .gigs > li .month {
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 6px;
+        }
+
+        .gigs > li .date .day {
+            background: #f3f1f1;
+            color: #333;
+            font-size: 20px;
+            padding: 5px 10px;
+        }
+
+        .gigs > li .details {
+            position: absolute;
+            top: 0px;
+            left: 70px;
+        }
+
+            .gigs > li .details .artist {
+                font-weight: bold;
+                display: block;
+            }
+
+            .gigs > li .details .genre {
+                font-size: 13px;
+                display: block;
+            }
+
+        .gigs > li .actions {
+            font-size: 15px;
+            display: none;
+        }
+
+        .gigs > li:hover .actions {
+            display: block;
+        }
+
+.btn-sm, .btn-group-sm > .btn {
+    padding: 2px 5px;
+    font-size: 11px;
+}
+
+.voffset {
+    margin-top: 2px;
+}
+
+.voffset1 {
+    margin-top: 5px;
+}
+
+.voffset2 {
+    margin-top: 10px;
+}
+
+.voffset3 {
+    margin-top: 20px;
+}
+
+.voffset4 {
+    margin-top: 40px;
+}
+
+.voffset5 {
+    margin-top: 80px;
+}
+
+.popover-notifications .popover-content {
+    padding: 0;
+}
+
+.popover-notifications ul.notifications {
+    list-style: none;
+    padding: 0;
+}
+.popover-notifications ul.notifications > li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+    .popover-notifications ul.notifications > li:last-child {
+        border-bottom: none;
+    }
+    .popover-notifications ul.notifications .highlight {
+        font-weight: bold;
+        color: #245e11;
+    }

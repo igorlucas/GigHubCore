@@ -1,0 +1,99 @@
+﻿@page
+@model GigHubCore.Pages.Gigs.MineModel
+
+@{
+    ViewData["Title"] = "Meus Shows";
+}
+
+@if (Model.Gigs.ToList().Count == 0)
+{
+    <h2>Não há shows para exibir</h2>
+    <a asp-page="/Gigs/CreateGig">Adicionar Show</a>
+}
+else
+{
+    <h2>Meus Shows</h2><br />
+}
+
+<ul class="gigs">
+    @foreach (var gig in Model.Gigs)
+    {
+        <li>
+            <div class="date">
+                <div class="month">
+                    @gig.DateTime.ToString("MMM")
+                </div>
+                <div class="day">
+                    @gig.DateTime.ToString("d ")
+                </div>
+            </div>
+            <div class="details">
+                <span class="artist">
+                    @gig.Venue
+                </span>
+                <span class="genre">
+                    @gig.Genre.Name
+                </span>
+                <div class="actions">
+                    <a asp-page="EditGig" asp-route-id="@gig.Id">Editar</a>
+                    <a href="#" class="js-cancel-gig" data-gig-id="@gig.Id">Cancelar</a>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
+
+<div>
+    <a asp-page="/Index">Voltar</a>
+</div>
+
+@section scripts
+    {
+    <script type="text/javascript">
+        $(document).ready(function ()
+        {
+            $(".js-cancel-gig").click(function (e)
+            {
+
+                bootbox.dialog({
+                    title: 'Confirmar',
+                    message: "Você tem certeza que deseja cancelar esse show",
+                    buttons: {
+                        no: {
+                            label: "não",
+                            className: 'btn-default',
+                            callback: function ()
+                            {
+                                bootbox.hideAll();
+                            }
+                        },
+                        ok: {
+                            label: "sim",
+                            className: 'btn-danger',
+                            callback: function ()
+                            {
+                                var link = $(e.target);
+                                $.ajax({
+                                    url: "/api/Gigs/" + link.attr("data-gig-id"),
+                                    method: "DELETE"
+                                })
+                                    .done(function ()
+                                    {
+                                        link.parents("li").fadeOut(function ()
+                                        {
+                                            $(this).remove();
+                                        })
+                                    })
+                                    .fail(function ()
+                                    {
+                                        alert("Algo errado");
+                                    });
+                            }
+                        }
+                    }
+                });
+
+            });
+        });
+    </script>
+}

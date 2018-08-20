@@ -1,0 +1,50 @@
+﻿@page
+@using GigHubCore.Persistence.DbContexts
+@model CreateGigModel
+@inject ApplicationDbContext _context;
+@{
+    
+    ViewData["Title"] = "Adicionar Show";
+}
+
+<h2>@ViewData["Title"]</h2>
+<br/>
+<p class="alert alert-info">Todos os campos são <strong>obrigatórios</strong>.</p>
+@Html.AntiForgeryToken()
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Venue" class="control-label"></label>
+                <input asp-for="Input.Venue" autofocus="autofocus" class="form-control"/>
+                <span asp-validation-for="Input.Venue" class="text-danger"></span>                
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Date" class="control-label"></label>
+                <input asp-for="Input.Date" class="form-control" />
+                <span asp-validation-for="Input.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Time" class="control-label"></label>
+                <input asp-for="Input.Time" class="form-control" />
+                <span asp-validation-for="Input.Time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Genre" class="control-label"></label>                               
+                <select asp-for="Input.Genre" asp-items="ViewBag.Genres" class = "form-control">
+                    <option value="@null">-- Selecione --</option>
+                </select>
+                <span asp-validation-for="Input.Genre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-info" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

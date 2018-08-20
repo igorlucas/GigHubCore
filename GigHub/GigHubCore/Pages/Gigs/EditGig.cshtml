@@ -1,0 +1,51 @@
+﻿@page
+@model GigHubCore.Pages.Gigs.EditGigModel
+@inject GigHubCore.Persistence.DbContexts.ApplicationDbContext _context
+@{
+    ViewData["Title"] = "Editar Show";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p class="alert alert-info">Todos os campos são <strong>obrigatórios</strong>.</p>
+@Html.AntiForgeryToken()
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <input type="hidden" asp-for="Input.Id" />
+            <div class="form-group">
+                <label asp-for="Input.Venue" class="control-label"></label>
+                <input asp-for="Input.Venue" autofocus="autofocus" class="form-control" />
+                <span asp-validation-for="Input.Venue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Date" class="control-label"></label>
+                <input asp-for="Input.Date" class="form-control" />
+                <span asp-validation-for="Input.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Time" class="control-label"></label>
+                <input asp-for="Input.Time" class="form-control" />
+                <span asp-validation-for="Input.Time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Genre" class="control-label"></label>
+                <select asp-for="Input.Genre" asp-items="@(new SelectList(_context.Genres.ToList(), "Id", "Name"))" class="form-control">
+                    <option value="@null">-- Selecione --</option>
+                </select>
+                <span asp-validation-for="Input.Genre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Atualizar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-page="Mine">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
